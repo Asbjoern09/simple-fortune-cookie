@@ -24,6 +24,12 @@ jobs:
         run: |
           cd frontend
           go build
-      - name: Run Go Tests
+  Test:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    steps:
+      - name: Run frontend test
         working-directory: frontend
         run: go test 
+        
+        
