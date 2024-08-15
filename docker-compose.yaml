@@ -1,0 +1,29 @@
+services:
+
+  frontend:
+    container_name: frontend
+    image: sadbutcowboy/frontend
+    # build:
+      # context: ./frontend/
+      # dockerfile: Dockerfile
+    ports:
+      - 80:8080
+    environment:
+      BACKEND_PORT: 9000
+      BACKEND_DNS: backend
+
+  backend:
+    container_name: backend
+    image: asbjoern09/gobackend
+    # build:
+      # context: ./backend/
+      # dockerfile: Dockerfile
+    environment:
+      REDIS_DNS: redis
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+      
