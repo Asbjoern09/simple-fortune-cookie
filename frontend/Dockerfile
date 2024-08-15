@@ -8,4 +8,6 @@ RUN go build -o frontend
 FROM gcr.io/distroless/base-debian11
 WORKDIR /app
 COPY --from=builder /app/frontend /app/frontend
+COPY --from=builder /app/templates /app/templates
+COPY --from=builder /app/static /app/static
 CMD ["/app/frontend"]
