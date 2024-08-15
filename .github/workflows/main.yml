@@ -7,7 +7,7 @@ on:
     branches:
       - main
 env:
-  docker_username: ${{ github.actor }}
+  docker_username: asbjoern09
   docker_password: ${{ secrets.GITHUB_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
 jobs:
@@ -41,5 +41,22 @@ jobs:
       - name: Run frontend test
         working-directory: frontend
         run: go test 
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    permissions:
+      packages: write
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v4
+      with:
+        name: code
+        path: .
+    - name: ls
+      run: ls -la CI-scripts
+    - name: build docker
+      run: bash CI-scripts/build-docker.sh
+    - name: push docker
+      run: bash CI-scripts/push-docker.sh
         
         
