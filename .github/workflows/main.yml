@@ -60,6 +60,8 @@ jobs:
         IMAGE: backend
       run: bash CI-scripts/build-docker.sh
     - name: push docker
+      env:
+        IMAGE: backend
       run: bash CI-scripts/push-docker.sh
   Docker-image-frontend:
     runs-on: ubuntu-latest
@@ -80,6 +82,8 @@ jobs:
         IMAGE: frontend
       run: bash CI-scripts/build-docker.sh
     - name: push docker
+      env:
+        IMAGE: frontend
       run: bash CI-scripts/push-docker.sh
         
         
