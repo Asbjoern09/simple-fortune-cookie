@@ -2,7 +2,7 @@ services:
 
   frontend:
     container_name: frontend
-    image: sadbutcowboy/frontend
+    image: asbjoern09/frontend
     # build:
       # context: ./frontend/
       # dockerfile: Dockerfile
