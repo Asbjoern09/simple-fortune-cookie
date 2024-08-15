@@ -17,9 +17,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Build backend
-        run: go build ./backend
+        run: go build backend
       - name: Build frontend
-        run: go build ./frontend
+        run: go build frontend
       - name: Run Go Tests
-        working-directory: ./frontend
+        working-directory: frontend
         run: go test 
