@@ -82,5 +82,17 @@ jobs:
       env:
         IMAGE: frontend
       run: bash CI-scripts/push-docker.sh
+  Deployment:
+    runs-on: ubuntu-latest
+    needs: [Docker-image-frontend, Docker-image-backend]
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v4
+        with:
+          name: code
+          path: .
+      - run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+      - run: kubectl --kubeconfig kubeconfig apply -f manifests
+  
         
         
