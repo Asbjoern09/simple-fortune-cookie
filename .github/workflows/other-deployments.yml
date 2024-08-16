@@ -1,8 +1,9 @@
-name: Main
+name: Other-deployments
 on:
   push:
     branches:
-      - main
+      - development
+      - staging
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}

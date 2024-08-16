@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-staging
+  name: backend-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-staging
+  template:
+    metadata:
+      labels:
+        app: backend-staging
+    spec:
+      containers:
+        - image: docker.io/asbjoern09/simple-fortune-cookie-backend:staging
+          name: backend-staging
