@@ -10,7 +10,7 @@ case "$BRANCH_NAME" in
     echo "Deploying to staging environment"
     kubectl --kubeconfig kubeconfig apply -f "$MANIFESTS_PATH/staging"
     ;;
-  feature)
+  development)
     echo "Deploying to development environment"
     kubectl --kubeconfig kubeconfig apply -f "$MANIFESTS_PATH/development"
     ;;
