@@ -11,3 +11,5 @@ Try that and see how that flies for you.
 - Binaries called `backend` and `frontend` will be created
 - Run both the frontend and backend with `go run frontend` and `go run backend` in the respective folder.
 - Familiarize yourself with the application (frontend and backend, try to add a cookie and re-run the backend)
+
+We can conclude that there isn't a database
