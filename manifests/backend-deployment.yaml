@@ -15,5 +15,5 @@ spec:
         app: backend
     spec:
       containers:
-        - image: docker.io/asbjoern09/simple-fortune-cookie-backend:1.0-4d1d87f5
+        - image: docker.io/asbjoern09/simple-fortune-cookie-backend:latest
           name: backend
