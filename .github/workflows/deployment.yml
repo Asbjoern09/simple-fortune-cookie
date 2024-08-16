@@ -121,9 +121,9 @@ jobs:
       - name: Push changes to staging
         if: ${{ github.ref_name == 'development' && success() }}
         run: git push --force-with-lease origin staging
-  Functional-Test:
+  Functional-test:
     runs-on: ubuntu-latest
-    needs: [Docker-image-frontend, Docker-image-backend]
+    needs: [Deployment]
     steps:
       - name: Download code
         uses: actions/download-artifact@v4
