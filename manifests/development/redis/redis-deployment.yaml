@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis-development
+  name: redis-development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-development
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis-development
+    spec:
+      volumes:
+        - name: redis-pvc 
+          persistentVolumeClaim:
+            claimName: redis-pvc
+      containers:
+        - image: docker.io/library/redis:7.0
+          name: redis-development
+          ports:
+            - containerPort: 6379
+          resources: {}
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: REDIS_PASSWORD
+          volumeMounts:
+            - name: redis-pvc
+              mountPath: /data
+              subPath: redis
+status: {}
