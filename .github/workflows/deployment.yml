@@ -1,8 +1,11 @@
-name: Main
+# This pipeline deploys runs on main, development and staging branches, it builds, tests, uplodas docker image to docker hub and deploys to kubernetes
+name: Deployment pipeline
 on:
   push:
     branches:
       - main
+      - development
+      - staging
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
