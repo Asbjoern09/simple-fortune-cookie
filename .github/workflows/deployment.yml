@@ -98,7 +98,12 @@ jobs:
       - run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
       - name: Run deployment script
         run: bash CI-scripts/deploy.sh
-      
-  
-        
-        
+      - name: Push to Staging if Tests Passed on Development Branch
+        if: ${{ github.ref_name == 'development' && success() }}
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git fetch origin
+          git checkout staging
+          git merge development
+          git push origin staging
