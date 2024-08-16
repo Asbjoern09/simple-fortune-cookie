@@ -5,7 +5,7 @@ case "$BRANCH_NAME" in
   main)
     echo "Deploying to production environment"
     kubectl --kubeconfig kubeconfig apply -f "$MANIFESTS_PATH/production/redis"
-    kubectl --kubeconfig kubeconfig apply -f "$MANIFESTS_PATH/production/redis"
+    kubectl --kubeconfig kubeconfig apply -f "$MANIFESTS_PATH/production"
     ;;
   staging)
     echo "Deploying to staging environment"
