@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend-development
+  name: frontend-development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-development
+  template:
+    metadata:
+      labels:
+        app: frontend-development
+    spec:
+      containers:
+        - image: docker.io/asbjoern09/simple-fortune-cookie-frontend:development
+          name: frontend-development
+          env:
+          - name: BACKEND_PORT
+            value: "9001"
+          - name: BACKEND_DNS
+            value: backend-development
+

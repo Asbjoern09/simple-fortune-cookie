@@ -1,8 +1,11 @@
-name: Main
+name: Development
 on:
   push:
     branches:
-      - main
+      - development
+  pull_request:
+    branches:
+      - development
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
