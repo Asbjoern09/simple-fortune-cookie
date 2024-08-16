@@ -108,6 +108,12 @@ jobs:
           ref: staging
           fetch-depth: 0
 
+      - name: Set Git identity
+        if: ${{ github.ref_name == 'development' && success() }}
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "Github Actions"
+
       - name: Rebase staging onto development
         if: ${{ github.ref_name == 'development' && success() }}
         run: git rebase origin/development
