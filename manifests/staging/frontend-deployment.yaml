@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: frontend
-  name: frontend
+    app: frontend-staging
+  name: frontend-staging
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: frontend-staging
   template:
     metadata:
       labels:
-        app: frontend
+        app: frontend-staging
     spec:
       containers:
-        - image: docker.io/asbjoern09/simple-fortune-cookie-frontend:latest
-          name: frontend
+        - image: docker.io/asbjoern09/simple-fortune-cookie-frontend:staging
+          name: frontend-staging
           env:
           - name: BACKEND_PORT
-            value: "9000"
+            value: "9002"
           - name: BACKEND_DNS
-            value: backend
+            value: backend-staging
 
