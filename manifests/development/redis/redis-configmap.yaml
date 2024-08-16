@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: redis-config
 data:
-  REDIS_DNS: redis
-  REDIS_PORT: '6381'
+  REDIS_DNS: redis-development
+  REDIS_PORT: '6379'
