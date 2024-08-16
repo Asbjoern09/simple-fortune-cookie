@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: backend
-  name: backend
+    app: backend-staging
+  name: backend-staging
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: backend-staging
   template:
     metadata:
       labels:
-        app: backend
+        app: backend-staging
     spec:
       containers:
-        - image: docker.io/asbjoern09/simple-fortune-cookie-backend:latest
-          name: backend
+        - image: docker.io/asbjoern09/simple-fortune-cookie-backend:staging
+          name: backend-staging
