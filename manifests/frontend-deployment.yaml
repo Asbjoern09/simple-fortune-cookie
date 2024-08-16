@@ -15,7 +15,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: docker.io/asbjoern09/simple-fortune-cookie-frontend:1.0-4d1d87f5:latest
+        - image: docker.io/asbjoern09/simple-fortune-cookie-frontend:latest
           name: frontend
           env:
           - name: BACKEND_PORT
