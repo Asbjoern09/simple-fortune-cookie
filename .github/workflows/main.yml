@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
@@ -92,7 +95,9 @@ jobs:
           name: code
           path: .
       - run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-      - run: kubectl --kubeconfig kubeconfig apply -f manifests
+      - name: Run deployment script
+        run: bash CI-scripts/deploy.sh
+      
   
         
         
