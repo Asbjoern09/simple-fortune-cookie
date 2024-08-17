@@ -110,12 +110,12 @@ jobs:
     - name: Scan Docker image with Trivy (main branch)
       if: github.ref_name == 'main'
       run: |
-        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${{DOCKER_USERNAME}}/simple-fortune-cookie-${IMAGE}:latest
+        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${docker_username}/simple-fortune-cookie-${IMAGE}:latest
 
     - name: Scan Docker image with Trivy (non-main branch)
       if: github.ref_name != 'main'
       run: |
-        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${DOCKER_USERNAME}/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
+        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${docker_username}/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
         
     - name: push docker
       env:
