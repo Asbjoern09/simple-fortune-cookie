@@ -135,4 +135,4 @@ jobs:
 
       - name: Push changes to staging
         if: ${{ github.ref_name == 'development' && success() }}
-        run: git push origin staging    
+        run: git push --force origin staging    
