@@ -159,7 +159,7 @@ jobs:
           git config user.name "Github Actions"
 
       - name: Rebase staging onto development
-        run: git rebase origin/development
+        run: git merge origin/development
 
       - name: Push changes to staging
         run: git push --force origin staging
