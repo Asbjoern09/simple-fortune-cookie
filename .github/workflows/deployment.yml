@@ -110,7 +110,7 @@ jobs:
     - name: Scan Docker image with Trivy
       env:
         IMAGE: frontend
-      run: trivy image --exit-code 1 --severity HIGH,CRITICAL $IMAGE
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL ${REPO}simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
     - name: push docker
       if: success()
       env:
