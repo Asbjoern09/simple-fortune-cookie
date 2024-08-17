@@ -74,7 +74,15 @@ jobs:
         DIRECTORY: backend/
         IMAGE: backend
       run: bash CI-scripts/build-docker.sh
+    - name: Install Trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+    - name: Scan Docker image with Trivy
+      env:
+        IMAGE: backend
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL $IMAGE
     - name: push docker
+      if: success()
       env:
         IMAGE: backend
       run: bash CI-scripts/push-docker.sh
@@ -96,7 +104,15 @@ jobs:
         DIRECTORY: frontend/
         IMAGE: frontend
       run: bash CI-scripts/build-docker.sh
+    - name: Install Trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+    - name: Scan Docker image with Trivy
+      env:
+        IMAGE: frontend
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL $IMAGE
     - name: push docker
+      if: success()
       env:
         IMAGE: frontend
       run: bash CI-scripts/push-docker.sh
