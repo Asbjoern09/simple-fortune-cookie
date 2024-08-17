@@ -107,11 +107,16 @@ jobs:
     - name: Install Trivy
       run: |
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
-    - name: Scan Docker image with Trivy
-      env:
-        IMAGE: frontend
-      run: trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/$docker_username/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
-      continue-on-error: true
+    - name: Scan Docker image with Trivy (main branch)
+      if: github.ref_name == 'main'
+      run: |
+        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${{DOCKER_USERNAME}}/simple-fortune-cookie-${IMAGE}:latest
+
+    - name: Scan Docker image with Trivy (non-main branch)
+      if: github.ref_name != 'main'
+      run: |
+        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${DOCKER_USERNAME}/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
+        
     - name: push docker
       env:
         IMAGE: frontend
