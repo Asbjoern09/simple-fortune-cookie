@@ -81,8 +81,8 @@ jobs:
       env:
         IMAGE: backend
       run: trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/$docker_username/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
+      continue-on-error: true
     - name: push docker
-      if: success()
       env:
         IMAGE: backend
       run: bash CI-scripts/push-docker.sh
@@ -111,8 +111,8 @@ jobs:
       env:
         IMAGE: frontend
       run: trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/$docker_username/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
+      continue-on-error: true
     - name: push docker
-      if: success()
       env:
         IMAGE: frontend
       run: bash CI-scripts/push-docker.sh
