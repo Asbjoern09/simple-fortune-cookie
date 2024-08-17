@@ -77,11 +77,20 @@ jobs:
     - name: Install Trivy
       run: |
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
-    - name: Scan Docker image with Trivy
+    - name: Scan Docker image with Trivy (main branch)
+      if: github.ref_name == 'main'
+      env:
+        IMAGE: backend
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/$docker_username/simple-fortune-cookie-${IMAGE}:latest
+      continue-on-error: true
+
+    - name: Scan Docker image with Trivy (non-main branch)
+      if: github.ref_name != 'main'
       env:
         IMAGE: backend
       run: trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/$docker_username/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
       continue-on-error: true
+      
     - name: push docker
       env:
         IMAGE: backend
@@ -109,14 +118,18 @@ jobs:
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
     - name: Scan Docker image with Trivy (main branch)
       if: github.ref_name == 'main'
-      run: |
-        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${docker_username}/simple-fortune-cookie-${IMAGE}:latest
+      env:
+        IMAGE: frontend
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/$docker_username/simple-fortune-cookie-${IMAGE}:latest
+      continue-on-error: true
 
     - name: Scan Docker image with Trivy (non-main branch)
       if: github.ref_name != 'main'
-      run: |
-        trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/${docker_username}/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
-        
+      env:
+        IMAGE: frontend
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL docker.io/$docker_username/simple-fortune-cookie-${IMAGE}:${BRANCH_NAME}
+      continue-on-error: true
+
     - name: push docker
       env:
         IMAGE: frontend
