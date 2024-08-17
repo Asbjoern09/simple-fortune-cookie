@@ -106,6 +106,8 @@ jobs:
   # If the tests pass, it can be rebased to staging.
   Rebase-to-staging:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     needs: [Deployment]
     steps:
       - name: Download code
